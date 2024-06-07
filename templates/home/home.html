@@ -668,5 +668,15 @@
 {% endblock main_content %}
 
 {% block scripts %}
+    <!-- chartjs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jvectormap -->
+    <script src="{% static 'js/jquery-jvectormap-2.0.5.min.js' %}"></script>
+    <script src="{% static 'js/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <!-- ploty -->
 
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/user-demographics.js' %}"></script>
 {% endblock scripts %}
