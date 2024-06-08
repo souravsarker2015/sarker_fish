@@ -131,6 +131,7 @@
                                     <th>Sale Image</th>
                                     <th>Sale Place</th>
                                     <th>Buyer</th>
+                                    <th>created</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -152,6 +153,7 @@
                                         </td>
                                         <td>{{ sell.sell_place }}</td>
                                         <td>{{ sell.buyer }}</td>
+                                        <td>{{ sell.created_at }}</td>
                                         <td>
                                             <a
                                                     href="index.html#"
@@ -329,7 +331,10 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action="" method="post" id="create_sale" novalidate>
+                        <form action="{% url 'sells' %}" method="post" id="create_sale" enctype="multipart/form-data"
+                              novalidate>
+                            {% csrf_token %}
+
                             <div class="row">
                                 <div class="mb-3 col-lg-6">
                                     <label for="sell_date" class="form-label"> Sale Date </label>
