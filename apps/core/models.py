@@ -7,3 +7,8 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class BusinessYear(BaseModel):
+    start_date = models.DateField()
+    end_date = models.DateField()
