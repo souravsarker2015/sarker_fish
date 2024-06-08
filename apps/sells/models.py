@@ -10,3 +10,6 @@ class Sell(BaseModel):
     sell_place = models.CharField(max_length=254, null=True, blank=True)
     buyer = models.CharField(max_length=254, null=True, blank=True)
     sell_description = models.TextField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'sell'

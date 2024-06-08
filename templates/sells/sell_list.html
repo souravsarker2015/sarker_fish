@@ -54,7 +54,7 @@
 
         <!-- page title -->
         <div class="pageTitle pt-3 pb-3 md-pt-0">
-            <h3 class="md-mb-0">Products</h3>
+            <h3 class="md-mb-0">Sales</h3>
             <div class="btn-toolbar mb-2">
                 <div class="btn-group me-2">
                     <button
@@ -66,10 +66,12 @@
                     >
                         Report
                     </button>
+
                     <button type="button" class="btn btn-sm btn-outline-secondary">
                         Export
                     </button>
                 </div>
+
                 <button
                         type="button"
                         class="btn btn-sm btn-outline-secondary dropdown-toggle"
@@ -79,7 +81,8 @@
                     <span data-feather="calendar"></span>
                     More options
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end">
+
+                <ul class="dropdown-menu dropdown-menu-end me-2">
                     <li>
                         <a class="dropdown-item" href="index.html#">
                             <small>
@@ -97,6 +100,19 @@
                         </a>
                     </li>
                 </ul>
+
+                <div class="btn-group ms-2">
+                    <button
+                            id="create_button"
+                            type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalCreate"
+                    >
+                        Create New
+                    </button>
+
+                </div>
             </div>
         </div>
         <!-- page title ends -->
@@ -110,575 +126,114 @@
                             <table class="table overflow-scroll table-hover">
                                 <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>Product</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>SKU</th>
-                                    <th>Weight</th>
-                                    <th>Modified date</th>
-                                    <th>Supplier Id</th>
-                                    <th></th>
+                                    <th>Sale Date</th>
+                                    <th>Sale Price</th>
+                                    <th>Sale Image</th>
+                                    <th>Sale Place</th>
+                                    <th>Buyer</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Smartphone X
-                                        </a>
-                                    </td>
-                                    <td>Electronics</td>
-                                    <td>$599.99</td>
-                                    <td>100</td>
-                                    <td>0.35</td>
-                                    <td>2023-12-20</td>
-                                    <td>S001</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Laptop Pro
-                                        </a>
-                                    </td>
-                                    <td>Computers</td>
-                                    <td>$1299.99</td>
-                                    <td>50</td>
-                                    <td>1.8</td>
-                                    <td>2023-11-30</td>
-                                    <td>S002</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Fitness Tracker
-                                        </a>
-                                    </td>
-                                    <td>Fitness</td>
-                                    <td>$49.99</td>
-                                    <td>200</td>
-                                    <td>0.1</td>
-                                    <td>2023-12-15</td>
-                                    <td>S003</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Wireless Headphones
-                                        </a>
-                                    </td>
-                                    <td>Audio</td>
-                                    <td>$79.99</td>
-                                    <td>150</td>
-                                    <td>0.5</td>
-                                    <td>2023-12-10</td>
-                                    <td>S004</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Digital Camera
-                                        </a>
-                                    </td>
-                                    <td>Photography</td>
-                                    <td>$399.99</td>
-                                    <td>80</td>
-                                    <td>1.2</td>
-                                    <td>2023-11-25</td>
-                                    <td>S005</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Smart Thermostat
-                                        </a>
-                                    </td>
-                                    <td>Home Automation</td>
-                                    <td>$89.99</td>
-                                    <td>120</td>
-                                    <td>0.8</td>
-                                    <td>2023-12-05</td>
-                                    <td>S006</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Gaming Mouse
-                                        </a>
-                                    </td>
-                                    <td>Gaming Accessories</td>
-                                    <td>$49.99</td>
-                                    <td>100</td>
-                                    <td>0.2</td>
-                                    <td>2023-12-18</td>
-                                    <td>S007</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Portable External SSD
-                                        </a>
-                                    </td>
-                                    <td>Storage</td>
-                                    <td>$159.99</td>
-                                    <td>70</td>
-                                    <td>0.3</td>
-                                    <td>2023-12-22</td>
-                                    <td>S008</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Smart Light Bulbs
-                                        </a>
-                                    </td>
-                                    <td>Smart Home</td>
-                                    <td>$29.99</td>
-                                    <td>180</td>
-                                    <td>0.15</td>
-                                    <td>2023-12-12</td>
-                                    <td>S009</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="flexCheckDefault"
-                                        />
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <img
-                                                src="https://placehold.co/50x50.png"
-                                                class="productImg me-2"
-                                                alt=""
-                                        />
-                                        <a href="index.html#" class="text-white amj-a">
-                                            Wireless Charging Pad
-                                        </a>
-                                    </td>
-                                    <td>Charging Accessories</td>
-                                    <td>$34.99</td>
-                                    <td>130</td>
-                                    <td>0.25</td>
-                                    <td>2023-12-28</td>
-                                    <td>S010</td>
-                                    <td>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDetail"
-                                        >
-                                            <i class="bi bi-link-45deg"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                        >
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a
-                                                href="index.html#"
-                                                class="amj-a me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalDeleteConfirmation"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                {% for sell in page_obj %}
+                                    <tr>
+                                        <td>{{ sell.sell_date }}</td>
+                                        <td>${{ sell.sell_price }}</td>
+                                        <td class="d-flex align-items-center">
+                                            <img
+                                                    {% if sell.sell_image %}
+                                                        src="{{ sell.sell_image.url }}"
+                                                    {% else %}
+                                                        src=""
+                                                    {% endif %}
+                                                        class="productImg me-2"
+                                                        alt=""
+                                            />
+                                        </td>
+                                        <td>{{ sell.sell_place }}</td>
+                                        <td>{{ sell.buyer }}</td>
+                                        <td>
+                                            <a
+                                                    href="index.html#"
+                                                    class="amj-a me-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalDetail"
+                                            >
+                                                <i class="bi bi-link-45deg"></i>
+                                            </a>
+                                            <a
+                                                    href="index.html#"
+                                                    class="amj-a me-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalEdit"
+                                            >
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <a
+                                                    href="index.html#"
+                                                    class="amj-a me-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalDeleteConfirmation"
+                                            >
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
 
-                        <!-- pagination -->
-                        <style></style>
+                        <!-- Pagination -->
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center my-3">
-                                <li class="page-item disabled">
-                                    <a class="page-link">Previous</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="index.html#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="index.html#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="index.html#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="index.html#">Next</a>
-                                </li>
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link">Previous</a>
+                                    </li>
+                                {% endif %}
+
+                                {% for num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == num %}
+                                        <li class="page-item active">
+                                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        </li>
+                                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link">Next</a>
+                                    </li>
+                                {% endif %}
                             </ul>
+                            {#                            <div class="d-flex justify-content-center">#}
+                            {#                                <select id="page-select" class="form-select w-auto">#}
+                            {#                                    {% for num in page_obj.paginator.page_range %}#}
+                            {#                                        <option value="{{ num }}" {% if page_obj.number == num %}selected{% endif %}>#}
+                            {#                                            Page {{ num }}</option>#}
+                            {#                                    {% endfor %}#}
+                            {#                                </select>#}
+                            {#                            </div>#}
                         </nav>
-                        <!-- pagination ends -->
+                        <!-- Pagination ends -->
                     </div>
                 </div>
+
+
             </div>
         </div>
         <!-- table ends -->
@@ -758,6 +313,116 @@
             </div>
         </div>
         <!-- modal for detail ends -->
+
+        <!-- modal for create -->
+        <div class="modal modal-dark" tabindex="-1" id="modalCreate">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Create new Sales</h6>
+                        <button
+                                type="button"
+                                class="btn-close btn-close-white"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                        ></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="" method="post" id="create_sale" novalidate>
+                            <div class="row">
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_date" class="form-label"> Sale Date </label>
+                                    <input
+                                            type="date"
+                                            class="form-control"
+                                            id="sell_date"
+                                            name="sell_date"
+                                            placeholder=""
+                                            value=""
+                                    />
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_price" class="form-label">Sale Price</label>
+                                    <input
+                                            type="number"
+                                            class="form-control"
+                                            id="sell_price"
+                                            name="sell_price"
+                                            placeholder="Sale Price"
+                                            value=""
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_image" class="form-label">Sale image</label>
+                                    <input
+                                            class="form-control"
+                                            type="file"
+                                            id="sell_image"
+                                            name="sell_image"
+                                            placeholder="Sale Image"
+                                            value=""
+                                    />
+                                </div>
+
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_place" class="form-label">Sale place</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="sell_place"
+                                            name="sell_place"
+                                            placeholder="sell place"
+                                            value=""
+                                    />
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_buyer" class="form-label">Buyer</label>
+                                    <input
+                                            class="form-control"
+                                            type="text"
+                                            id="sell_buyer"
+                                            name="buyer"
+                                            placeholder="Buyer"
+                                            value=""
+                                    />
+                                </div>
+
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_description" class="form-label">Sale Description</label>
+                                    <textarea
+                                            class="form-control"
+                                            id="sell_description"
+                                            name="sell_description"
+                                            rows="1"
+                                            placeholder="sale description"
+                                    ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"> Close
+                                </button>
+                                <input type="submit" class="btn btn-warning" data-bs-dismiss="modal" value="Create">
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- modal for create ends -->
 
         <!-- modal for edit -->
         <div class="modal modal-dark" tabindex="-1" id="modalEdit">
@@ -1009,5 +674,10 @@ some description is here.</textarea
 {% endblock main_content %}
 
 {% block scripts %}
-
+    <script>
+        /*document.getElementById('page-select').addEventListener('change', function () {
+            var selectedPage = this.value;
+            window.location.href = '?page=' + selectedPage;
+        });*/
+    </script>
 {% endblock scripts %}

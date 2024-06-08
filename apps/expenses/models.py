@@ -16,3 +16,6 @@ class Expense(BaseModel):
     expense_amount = models.DecimalField(max_digits=10, decimal_places=2)
     expense_type = models.CharField(max_length=30, choices=EXPENSE_TYPE_CHOICES)
     expense_details = models.TextField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'expense'
