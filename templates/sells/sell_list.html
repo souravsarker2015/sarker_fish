@@ -54,7 +54,7 @@
 
         <!-- page title -->
         <div class="pageTitle pt-3 pb-3 md-pt-0">
-            <h3 class="md-mb-0">Sales</h3>
+            <h3 class="md-mb-0"><a href="{% url 'sells' %}">Sales</a></h3>
             <div class="btn-toolbar mb-2">
                 <div class="btn-group me-2">
                     <button
@@ -156,18 +156,25 @@
                                         <td>{{ sell.created_at }}</td>
                                         <td>
                                             <a
-                                                    href="index.html#"
+                                                    href="#"
                                                     class="amj-a me-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#modalDetail"
+                                                    data-instance-id="{{ sell.id | safe }}"
+                                                    data-operation-type="sale_details"
+                                                    onclick="get_sell_details(this)"
                                             >
                                                 <i class="bi bi-link-45deg"></i>
                                             </a>
+
                                             <a
-                                                    href="index.html#"
+                                                    href="#"
                                                     class="amj-a me-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#modalEdit"
+                                                    data-instance-id="{{ sell.id | safe }}"
+                                                    data-operation-type="sale_update"
+                                                    onclick="get_sell_details(this)"
                                             >
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
@@ -176,6 +183,8 @@
                                                     class="amj-a me-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#modalDeleteConfirmation"
+                                                    data-operation-type="sale_delete"
+                                                    onclick="get_sell_details(this)"
                                             >
                                                 <i class="bi bi-trash"></i>
                                             </a>
@@ -246,7 +255,7 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h6 class="modal-title">Smartphone x | 2024</h6>
+                        {#                        <h6 class="modal-title">Smartphone x | 2024</h6>#}
                         <button
                                 type="button"
                                 class="btn-close"
@@ -261,7 +270,7 @@
                                     class="col-lg-3 d-flex justify-content-center align-item-center"
                             >
                                 <img
-                                        class="img-fluid img-thumbnail"
+                                        class="img-fluid img-thumbnail modal_details_img"
                                         src="https://placehold.co/200x200.png"
                                         alt=""
                                 />
@@ -269,44 +278,35 @@
                             <div class="col-lg-8 sm-mt-1">
                                 <!--  -->
                                 <div>
-                                    <h4>Smartphone x | 2024</h4>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip
-                                        ex ea commodo consequat.
+                                    <h4>Sale Date : <span class="modal_details_sale_date"></span></h4>
+                                    <p class="modal_details_sale_description">
+
                                     </p>
                                 </div>
-                                <!--  -->
-                                <div>
-                                    <h6>Category</h6>
-                                    <p>Computers</p>
-                                </div>
-                                <!-- price, sku, weight -->
+
                                 <div class="d-flex justify-content-between">
-                        <span>
-                          <h6>Price</h6>
-                          <p>$599.99</p>
-                        </span>
                                     <span>
-                          <h6>SKU</h6>
-                          <p>200</p>
-                        </span>
+                                        <h6>Price</h6>
+                                        <p class="modal_details_sale_price">$599.99</p>
+                                    </span>
                                     <span>
-                          <h6>Weight</h6>
-                          <p>300 gm</p>
-                        </span>
+                                        <h6>Sale Place</h6>
+                                        <p class="modal_details_sale_place">Navaron</p>
+                                   </span>
+                                    <span>
+                                      <h6>Buyer</h6>
+                                      <p class="modal_details_sale_buyer">Biddut</p>
+                                    </span>
                                 </div>
-                                <!-- Supplier id -->
-                                <div>
-                                    <h6>Supplier</h6>
-                                    <p>s2002 | Awesome Computer Supplier GmBH</p>
-                                </div>
+
                                 <!-- Modified date -->
                                 <div>
+                                    <h6>Created Date</h6>
+                                    <p class="modal_details_sale_created_at">24-01-2024</p>
+                                </div>
+                                <div>
                                     <h6>Modified Date</h6>
-                                    <p>24-01-2024</p>
+                                    <p class="modal_details_sale_updated_at">24-01-2024</p>
                                 </div>
                             </div>
                         </div>
@@ -381,6 +381,7 @@
                                             name="sell_image"
                                             placeholder="Sale Image"
                                             value=""
+                                            accept="image/*" s
                                     />
                                     {% if form.errors.sell_image %}
                                         <div class="text-danger">
@@ -465,7 +466,7 @@
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content bg-dark">
                     <div class="modal-header">
-                        <h6 class="modal-title">Update Smartphone X</h6>
+                        <h6 class="modal-title">Update Sale</h6>
                         <button
                                 type="button"
                                 class="btn-close btn-close-white"
@@ -474,170 +475,161 @@
                         ></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form
+                                action=""
+                                method="post"
+                                data-update-instance-id=""
+                                id="update_sale_form"
+                                enctype="multipart/form-data"
+                                novalidate
+                        >
+                            {% csrf_token %}
+
                             <div class="row">
                                 <div class="mb-3 col-lg-6">
-                                    <label for="productInput" class="form-label"
-                                    >Product</label
-                                    >
+                                    <label for="sell_date_update_modal" class="form-label"> Sale Date </label>
                                     <input
-                                            type="text"
+                                            type="date"
                                             class="form-control"
-                                            id="productInput"
-                                            placeholder="product title"
-                                            value="Smartphone X"
+                                            id="sell_date_update_modal"
+                                            name="sell_date"
+                                            placeholder=""
+                                            {% if sell %}
+                                                {#                                            value="{{ sell.sell_date }}"#}
+                                            value="{{ sell.sell_date|date:'Y-m-d' }}"
+                                            {% else %}
+                                            value=""
+                                            {% endif %}
+
                                     />
+                                    {% if form.errors.sell_date %}
+                                        <div class="text-danger form_update_error_class">
+                                            <p class="text-danger my-3">{{ form.errors.sell_date }}</p>
+                                        </div>
+                                    {% endif %}
+
                                 </div>
                                 <div class="mb-3 col-lg-6">
-                                    <label for="categorySelect" class="form-label"
-                                    >Product</label
-                                    >
-                                    <select
-                                            id="categorySelect"
-                                            class="form-select"
-                                            aria-label="Default select example"
-                                    >
-                                        <option>Category</option>
-                                        <option value="1">Electronics</option>
-                                        <option value="2" selected>Computers</option>
-                                        <option value="3">Fitness</option>
-                                        <option value="3">......</option>
-                                    </select>
+                                    <label for="sell_price_update_modal" class="form-label">Sale Price</label>
+                                    <input
+                                            type="number"
+                                            class="form-control"
+                                            id="sell_price_update_modal"
+                                            name="sell_price"
+                                            placeholder="Sale Price"
+                                            {% if sell %}
+                                            value="{{ sell.sell_price }}"
+                                            {% else %}
+                                            value=""
+                                            {% endif %}
+                                    />
+                                    {% if form.errors.sell_price %}
+                                        <div class="text-danger form_update_error_class">
+                                            <p class="text-danger my-3">{{ form.errors.sell_price }}</p>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="mb-3 col-lg-6">
-                                    <label for="priceInput" class="form-label">Price</label>
-                                    <input
-                                            type="text"
-                                            class="form-control"
-                                            id="priceInput"
-                                            placeholder="product price"
-                                            value="$599.99"
-                                    />
-                                </div>
-                                <div class="mb-3 col-lg-6">
-                                    <label for="skuInput" class="form-label">SKU</label>
-                                    <input
-                                            type="text"
-                                            class="form-control"
-                                            id="skuInput"
-                                            placeholder="product sku"
-                                            value="200"
-                                    />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="mb-3 col-lg-6">
-                                    <label for="weightInput" class="form-label"
-                                    >Weight</label
-                                    >
-                                    <input
-                                            type="text"
-                                            class="form-control"
-                                            id="weightInput"
-                                            placeholder="product weight"
-                                            value="500 gm"
-                                    />
-                                </div>
-                                <div class="mb-3 col-lg-6">
-                                    <label for="dateInput" class="form-label"
-                                    >Modified Date</label
-                                    >
-                                    <input
-                                            type="text"
-                                            class="form-control"
-                                            id="dateInput"
-                                            placeholder="product modified date"
-                                            value="2023-12-20"
-                                    />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="mb-3 col-lg-12">
-                                    <label for="supplierDataList" class="form-label"
-                                    >Supplier</label
-                                    >
-                                    <input
-                                            class="form-control"
-                                            list="datalistOptions"
-                                            id="supplierDataList"
-                                            placeholder="Type to search..."
-                                            value="s001"
-                                            aria-describedby="supplierHelpInline"
-                                    />
-                                    <datalist id="datalistOptions">
-                                        <option value="s001"></option>
-                                        <option value="s002"></option>
-                                        <option value="s003"></option>
-                                        <option value="s004"></option>
-                                    </datalist>
-                                    <span id="supplierHelpInline" class="form-text">
-                          You can also search from the DataList.
-                        </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="mb-3 col-lg-12">
-                                    <label for="formFile" class="form-label"
-                                    >Upload image</label
-                                    >
+                                    <label for="sell_image_update_modal" class="form-label">Sale image</label>
                                     <input
                                             class="form-control"
                                             type="file"
-                                            id="formFile"
-                                            placeholder="product img"
-                                            value="images/smartphone-200x200.png"
+                                            id="sell_image_update_modal"
+                                            name="sell_image"
+                                            placeholder="Sale Image"
+                                            value=""
+                                            accept="image/*"
                                     />
+                                    {% if form.errors.sell_image %}
+                                        <div class="text-danger form_update_error_class">
+                                            <p class="text-danger my-3">{{ form.errors.sell_image }}</p>
+                                        </div>
+                                    {% endif %}
                                 </div>
+
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_place_update_modal" class="form-label">Sale place</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="sell_place_update_modal"
+                                            name="sell_place"
+                                            placeholder="sell place"
+                                            {% if sell %}
+                                            value="{{ sell.sell_place }}"
+                                            {% else %}
+                                            value=""
+                                            {% endif %}
+                                    />
+                                    {% if form.errors.sell_place %}
+                                        <div class="text-danger form_update_error_class">
+                                            <p class="text-danger my-3">{{ form.errors.sell_place }}</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
                             </div>
+
                             <div class="row">
-                                <div class="mb-3 col-lg-12">
-                                    <label for="descriptionTextArea" class="form-label"
-                                    >Description</label
-                                    >
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_buyer_update_modal" class="form-label">Buyer</label>
+                                    <input
+                                            class="form-control"
+                                            type="text"
+                                            id="sell_buyer_update_modal"
+                                            name="buyer"
+                                            placeholder="Buyer"
+                                            {% if sell %}
+                                            value="{{ sell.buyer }}"
+                                            {% else %}
+                                            value=""
+                                            {% endif %}
+
+                                    />
+                                    {% if form.errors.buyer %}
+                                        <div class="text-danger form_update_error_class">
+                                            <p class="text-danger my-3">{{ form.errors.buyer }}</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="mb-3 col-lg-6">
+                                    <label for="sell_description_update_modal" class="form-label">Sale
+                                        Description</label>
                                     <textarea
                                             class="form-control"
-                                            id="descriptionTextArea"
-                                            rows="3"
-                                            placeholder="product description"
-                                    >
-some description is here.</textarea
-                                    >
+                                            id="sell_description_update_modal"
+                                            name="sell_description"
+                                            rows="1"
+                                            placeholder="sale description"
+                                    >{% if sell %}
+                                        {{ sell.sell_description | safe }}
+                                    {% endif %}
+                                    </textarea>
+                                    {% if form.errors.sell_description %}
+                                        <div class="text-danger form_update_error_class">
+                                            <p class="text-danger my-3">{{ form.errors.sell_description }}</p>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-check">
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                id="gridCheck"
-                                        />
-                                        <label class="form-check-label" for="gridCheck">
-                                            Form check option
-                                        </label>
-                                    </div>
-                                </div>
+
+                            <div class="modal-footer">
+                                <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"> Close
+                                </button>
+                                <input type="submit" class="btn btn-warning" data-bs-dismiss="modal" value="Update">
+
                             </div>
                         </form>
+
                     </div>
-                    <div class="modal-footer">
-                        <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                        >
-                            Close
-                        </button>
-                        <button
-                                type="button"
-                                class="btn btn-warning"
-                                data-bs-dismiss="modal"
-                        >
-                            Update
-                        </button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -659,6 +651,7 @@ some description is here.</textarea
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                         ></button>
+
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-danger mb-0" role="alert">
@@ -673,13 +666,21 @@ some description is here.</textarea
                         >
                             Close
                         </button>
-                        <button
+                        {#                        <button#}
+                        {#                                type="button"#}
+                        {#                                class="btn btn-danger"#}
+                        {#                                data-bs-dismiss="modal"#}
+                        {#                        >#}
+                        {#                            Yes, I am sure#}
+                        {#                        </button>#}
+
+                        <a
+                                href=""
                                 type="button"
                                 class="btn btn-danger"
                                 data-bs-dismiss="modal"
-                        >
-                            Yes, I am sure
-                        </button>
+                                id="delete_modal_confirm_button"
+                        >Yes, I am sure</a>
                     </div>
                 </div>
             </div>
@@ -711,20 +712,144 @@ some description is here.</textarea
 
 {% block scripts %}
     <script>
+        function submit_update_form() {
+            let form = document.getElementById('update_sale_form');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                let updateInstanceId = form.getAttribute('data-update-instance-id');
+                form.setAttribute('action', `/sells/${updateInstanceId}/`);
+                form.submit();
+            });
+        }
+
+        function insert_data_in_sell_update_modal(data) {
+
+            let update_form = document.getElementById('update_sale_form');
+            update_form.setAttribute('data-update-instance-id', `${data.id}`);
+
+            let sale_date = document.querySelector('#sell_date_update_modal');
+            sale_date.value = data.sell_date;
+
+            /*if (data.sell_image !== "") {
+                let sell_image = document.querySelector('#sell_image_update_modal');
+                console.log(data.sell_image)
+                sell_image.src = data.sell_image;
+            }*/
+
+            let sale_description = document.querySelector('#sell_description_update_modal');
+            sale_description.textContent = data.sell_description;
+
+            let sale_price = document.querySelector('#sell_price_update_modal');
+            sale_price.value = data.sell_price;
+
+            let sale_place = document.querySelector('#sell_place_update_modal');
+            sale_place.value = data.sell_place;
+
+            let sale_buyer = document.querySelector('#sell_buyer_update_modal');
+            sale_buyer.value = data.buyer;
+        }
+
+        function insert_data_in_sell_detail_modal(data) {
+            let sale_date = document.querySelector('.modal_details_sale_date');
+            sale_date.textContent = `${new Intl.DateTimeFormat('en-US', {
+                month: 'long',
+                day: '2-digit',
+                year: 'numeric',
+            }).format(new Date(data.sell_date))}`;
+            if (data.sell_image !== "") {
+                let sell_image = document.querySelector('.modal_details_img');
+                console.log(data.sell_image)
+                sell_image.src = data.sell_image;
+            }
+
+            let sale_description = document.querySelector('.modal_details_sale_description');
+            sale_description.textContent = data.sell_description;
+
+            let sale_price = document.querySelector('.modal_details_sale_price');
+            sale_price.textContent = data.sell_price;
+
+            let sale_place = document.querySelector('.modal_details_sale_place');
+            sale_place.textContent = data.sell_place;
+
+            let sale_buyer = document.querySelector('.modal_details_sale_buyer');
+            sale_buyer.textContent = data.buyer;
+            let sale_created_at = document.querySelector('.modal_details_sale_created_at');
+            sale_created_at.textContent = `${new Intl.DateTimeFormat('en-US', {
+                month: 'long',
+                day: '2-digit',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            }).format(new Date(data.created_at))}`;
+
+            let sale_updated_at = document.querySelector('.modal_details_sale_updated_at');
+            sale_updated_at.textContent = `${new Intl.DateTimeFormat('en-US', {
+                month: 'long',
+                day: '2-digit',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            }).format(new Date(data.updated_at))}`;
+        }
+
+        function hide_form_update_error_messages() {
+            let errorElements = document.querySelectorAll('.form_update_error_class');
+            errorElements.forEach(function (element) {
+                element.style.display = 'none';
+            });
+        }
+
+        function get_sell_details(e) {
+            let instanceId = e.getAttribute('data-instance-id');
+            let operation_type = e.getAttribute('data-operation-type');
+            $.ajax({
+                url: `/sells/${instanceId}`,
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    if (operation_type === 'sale_details') {
+                        insert_data_in_sell_detail_modal(response.data)
+                    } else if (operation_type === 'sale_update') {
+                        hide_form_update_error_messages();
+                        insert_data_in_sell_update_modal(response.data)
+                    }else if (operation_type === 'sale_update') {
+                        hide_form_update_error_messages();
+                        insert_data_in_sell_update_modal(response.data)
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching sell details:', status, error);
+                }
+            });
+        }
+
         function form_error_check() {
-            let form_error_exists = '{{ form_error_exists | safe }}';
-            if (form_error_exists === 'True') {
-                showModal();
+            let form_creation_error_exists = '{{ form_creation_error_exists | safe }}';
+            let form_update_error_exists = '{{ form_update_error_exists | safe }}';
+            if (form_creation_error_exists === 'True') {
+                showModal('sale_create_modal');
+            } else if (form_update_error_exists === 'True') {
+                showModal('sale_update_modal');
             }
         }
 
-        function showModal() {
-            let modal = new bootstrap.Modal(document.getElementById('modalCreate'));
-            modal.show();
+        function showModal(modalName) {
+            if (modalName === 'sale_create_modal') {
+                let modal = new bootstrap.Modal(document.getElementById('modalCreate'));
+                modal.show();
+            } else if (modalName === 'sale_update_modal') {
+                let modal = new bootstrap.Modal(document.getElementById('modalEdit'));
+                modal.show();
+            }
+
         }
 
         document.addEventListener('DOMContentLoaded', (event) => {
             form_error_check();
+            submit_update_form();
         });
 
         /*document.getElementById('page-select').addEventListener('change', function () {

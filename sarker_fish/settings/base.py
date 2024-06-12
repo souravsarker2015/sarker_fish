@@ -8,6 +8,7 @@ load_dotenv(dotenv_path)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
+SITE_URL = os.environ.get("BASE_URL")
 
 DEBUG = True
 
