@@ -2,9 +2,15 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-dotenv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'configurations', '.env')
-load_dotenv(dotenv_path)
+# dotenv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'configurations', '.env')
+# print(dotenv_path)
+# load_dotenv(dotenv_path)
 
+# Construct the path to the .env file
+dotenv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'configurations', '.env')
+
+# Print the constructed path (for debugging purposes)
+print(dotenv_path)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")

@@ -1,11 +1,11 @@
-BASE_URL=http://0.0.0.0:8011/
-SECRET_KET=django-insecure-y81v+fr*qy6%2o_wopv9ks)85(cmvrq89)%ljv4#r-b@n5k1(4
+BASE_URL=http://localhost:8000/
+SECRET_KEY=%00mk@ophw=w^53=coddr9e@!b-efxklkcs^+!+sbgiu00o84i
 
-DB_NAME=email_portal
+DB_NAME=sarker_fish
 DB_USER=root
-DB_PASSWORD=root1234
-DB_HOST=127.0.0.1
-DB_PORT=5432
+DB_PASSWORD=password
+DB_HOST=localhost
+DB_PORT=3306
 
 
 EMAIL_HOST=smtp.gmail.com
@@ -14,4 +14,4 @@ EMAIL_HOST_PASSWORD=ccgerwmditnbemeb
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 
-DJANGO_SETTINGS_MODULE=email_sending_portal.settings.local
+DJANGO_SETTINGS_MODULE=sarker_fish.settings.local
