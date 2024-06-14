@@ -53,15 +53,17 @@ class SellDetails(View):
 
     def delete(self, request, *args, **kwargs):
         sell_id = kwargs.get('id')
-        sell = SellDetailsUseCase({'id': sell_id}).execute()
+        sell = SellDetailsUseCase(request, {'id': sell_id}).execute()
         if sell:
             sell.delete()
-            return redirect('sells')
+            # return redirect('sells')
+            return JsonResponse({'success': True, 'data': {'id': sell_id}})
         else:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                'Sell not found',
-                extra_tags='sell_not_found'
-            )
-            return redirect('sells')
+            return JsonResponse({'success': False, 'data': {'id': sell_id}})
+            # messages.add_message(
+            #     request,
+            #     messages.ERROR,
+            #     'Sell not found',
+            #     extra_tags='sell_not_found'
+            # )
+            # return redirect('sells')

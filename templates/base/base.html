@@ -29,6 +29,8 @@
             content="{% static 'img/favicons/android-chrome-192x192.png' %}"
     />
     <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
 
     <title>{% block title %} Sarker Fish {% endblock title %}</title>
     <!-- <meta http-equiv="refresh" content="5"/> -->
@@ -102,19 +104,21 @@
             >
                 <!-- logo for LG screen -->
                 <span class="fs-4 logo-lg only-d-lg">
-              <a href="index.html">
-                <img src="{% static 'img/logo-100x25.png' %}" alt=""/>
-              </a>
-            </span>
+                  <a href="index.html">
+{#                    <img src="{% static 'img/logo-100x25.png' %}" alt=""/>#}
+{#                    <img src="{% static 'images/logo/srker_fish.jpeg' %}" style="width: 10%" alt=""/>#}
+                    <img src="{% static 'images/logo/srker_fish2.jpeg' %}"  alt=""/>
+                  </a>
+                </span>
                 <!-- logo for SM screen -->
                 <span class="fs-4 logo-sm only-d-sm">
-              <img src="{% static 'img/logo-40x25.png' %}" alt=""/>
-            </span>
+                  <img src="{% static 'img/logo-40x25.png' %}" alt=""/>
+                </span>
 
                 <!-- for SM screen - close -->
                 <span class="d-none" id="sidebarUntoggleBtn">
-              <i class="bi bi-x-circle-fill"></i>
-            </span>
+                  <i class="bi bi-x-circle-fill"></i>
+                </span>
             </div>
             <!-- first a ends -->
             <hr/>
@@ -360,7 +364,7 @@
                     <span class="mb-3 mb-md-0">© Sarker Fish | 2024</span>
                 </div>
                 <div class="col text-small text-end">
-{#              <span class="mb-3 mb-md-0">#}
+                    {#              <span class="mb-3 mb-md-0">#}
                     {#                Designed by#}
                     {#                <a#}
                     {#                        href="#"#}

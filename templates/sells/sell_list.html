@@ -4,6 +4,11 @@
     Home
 {% endblock %}
 
+{% block header %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+{% endblock header %}
+
 {% block main_content %}
     <div class="container-fluid px-4">
         <!-- section searchForMobile -->
@@ -128,10 +133,10 @@
                                 <tr>
                                     <th>Sale Date</th>
                                     <th>Sale Price</th>
-                                    <th>Sale Image</th>
+{#                                    <th>Sale Image</th>#}
                                     <th>Sale Place</th>
                                     <th>Buyer</th>
-                                    <th>created</th>
+{#                                    <th>created</th>#}
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -140,20 +145,20 @@
                                     <tr>
                                         <td>{{ sell.sell_date }}</td>
                                         <td>${{ sell.sell_price }}</td>
-                                        <td class="d-flex align-items-center">
-                                            <img
-                                                    {% if sell.sell_image %}
-                                                        src="{{ sell.sell_image.url }}"
-                                                    {% else %}
-                                                        src=""
-                                                    {% endif %}
-                                                        class="productImg me-2"
-                                                        alt=""
-                                            />
-                                        </td>
+{#                                        <td class="d-flex align-items-center">#}
+{#                                            <img#}
+{#                                                    {% if sell.sell_image %}#}
+{#                                                        src="{{ sell.sell_image.url }}"#}
+{#                                                    {% else %}#}
+{#                                                        src=""#}
+{#                                                    {% endif %}#}
+{#                                                        class="productImg me-2"#}
+{#                                                        alt=""#}
+{#                                            />#}
+{#                                        </td>#}
                                         <td>{{ sell.sell_place }}</td>
                                         <td>{{ sell.buyer }}</td>
-                                        <td>{{ sell.created_at }}</td>
+{#                                        <td>{{ sell.created_at }}</td>#}
                                         <td>
                                             <a
                                                     href="#"
@@ -179,11 +184,12 @@
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                             <a
-                                                    href="index.html#"
+                                                    href="#"
                                                     class="amj-a me-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#modalDeleteConfirmation"
                                                     data-operation-type="sale_delete"
+                                                    data-instance-id="{{ sell.id | safe }}"
                                                     onclick="get_sell_details(this)"
                                             >
                                                 <i class="bi bi-trash"></i>
@@ -679,7 +685,9 @@
                                 type="button"
                                 class="btn btn-danger"
                                 data-bs-dismiss="modal"
-                                id="delete_modal_confirm_button"
+                                data-delete-instance-id=""
+                                id="delete_modal_confirm_delete_button"
+                                onclick=delete_sale_item(this)
                         >Yes, I am sure</a>
                     </div>
                 </div>
@@ -720,6 +728,51 @@
                 form.setAttribute('action', `/sells/${updateInstanceId}/`);
                 form.submit();
             });
+        }
+
+        function getCsrfToken() {
+            return $('meta[name="csrf-token"]').attr('content');
+        }
+
+        function delete_sale_item(e) {
+            let instanceId = e.getAttribute('data-delete-instance-id');
+            let csrfToken = getCsrfToken();
+
+            $.ajax({
+                url: '/sells/' + instanceId,
+                type: 'DELETE',
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('X-CSRFToken', csrfToken);
+                },
+                success: function (response) {
+                    console.log('Sale item deleted successfully:', response);
+                    window.location.href = "{% url 'sells' %}";
+                    // You can add more actions here, like refreshing the page or updating the UI
+                },
+                error: function (xhr, status, error) {
+                    console.error('There was a problem with the delete request:', error);
+                }
+            });
+        }
+
+        /*function delete_sale_item(e) {
+            let instanceId = e.getAttribute('data-delete-instance-id');
+            $.ajax({
+                url: '/sells/' + instanceId,
+                type: 'DELETE',
+                success: function (response) {
+                    console.log('Sale item deleted successfully:', response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('There was a problem with the delete request:', error);
+                }
+            });
+        }*/
+
+        function insert_data_in_sell_delete_modal(data) {
+            let delete_modal_confirm_delete_button = document.getElementById('delete_modal_confirm_delete_button');
+
+            delete_modal_confirm_delete_button.setAttribute('data-delete-instance-id', `${data.id}`);
         }
 
         function insert_data_in_sell_update_modal(data) {
@@ -815,9 +868,8 @@
                     } else if (operation_type === 'sale_update') {
                         hide_form_update_error_messages();
                         insert_data_in_sell_update_modal(response.data)
-                    }else if (operation_type === 'sale_update') {
-                        hide_form_update_error_messages();
-                        insert_data_in_sell_update_modal(response.data)
+                    } else if (operation_type === 'sale_delete') {
+                        insert_data_in_sell_delete_modal(response.data)
                     }
                 },
                 error: function (xhr, status, error) {
