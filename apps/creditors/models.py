@@ -17,3 +17,11 @@ class Creditor(BaseModel):
 
     class Meta:
         db_table = 'creditor'
+
+
+class CreditHistory(BaseModel):
+    creditor = models.ForeignKey(Creditor, on_delete=models.CASCADE)
+    given_amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        db_table = 'credit_history'
